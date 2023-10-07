@@ -1,0 +1,98 @@
+  <div class='property-item rounded overflow-hidden><div class='position-relative overflow-hidden'><a href=''><img class='img-fluid' src='assets/img/property/property-1.jpg' alt=''></a><div class='bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3'>For A Week</div><div class='bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3'>Apartment</div></div><div class='p-4 pb-0'><h5 class='text-primary mb-3'>3rd Floor</h5><a class='d-block h5 mb-2' href=''>Apartment For Rent</a><p><i class='fa fa-map-marker-alt text-primary me-2'></i>Amrutdham ,Nashik</p></div><div class='d-flex border-top'><small class='flex-fill text-center border-end py-2'><i class='fa fa-ruler-combined text-primary me-2'></i>1000 Sqft</small><small class='flex-fill text-center border-end py-2'><i class='fa fa-bed text-primary me-2'></i>3 Rooms</small><small class='flex-fill text-center py-2'><i class='fa fa-bath text-primary me-2'></i>10 x 5 Door size</small></div></div></div>
+  <div class='tab-content'><div id='tab-1' class='tab-pane fade show p-0 active'><div class='row g-4'>
+
+
+
+    <div class='container-xxl py-5'>
+        <div class='container'>
+            <div class='row g-0 gx-5 align-items-end'>
+                <div class='col-lg-6'>
+                    <div class='text-start mx-auto mb-5 wow slideInLeft' data-wow-delay='0.1s'>
+                        <h1 class='mb-3'>Property Listing</h1>
+                        <p>We have some properties for you.</p>
+                    </div>
+                </div>
+            </div>
+            <div class='tab-content'>
+                <div id='tab-1' class='tab-pane fade show p-0 active'>
+                    <div class='row g-4'>
+                        <div class='col-lg-4 col-md-6 wow fadeInUp' data-wow-delay='0.1s'>
+                            <div class='property-item rounded overflow-hidden'>
+                                <div class='position-relative overflow-hidden'>
+                                    <a href=''><img class='img-fluid' src='assets/img/property/property-1.jpg' alt=''></a>
+                                    <div class='bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3'>For A Week</div>
+                                    <div class='bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3'>Apartment</div>
+                                </div>
+                                <div class='p-4 pb-0'>
+                                    <h5 class='text-primary mb-3'>3rd Floor</h5>
+                                    <a class='d-block h5 mb-2' href=''>Apartment For Rent</a>
+                                    <p><i class='fa fa-map-marker-alt text-primary me-2'></i>Amrutdham ,Nashik</p>
+                                </div>
+                                <div class='d-flex border-top'>
+                                    <small class='flex-fill text-center border-end py-2'><i class='fa fa-ruler-combined text-primary me-2'></i>1000 Sqft</small>
+                                    <small class='flex-fill text-center border-end py-2'><i class='fa fa-bed text-primary me-2'></i>3 Rooms</small>
+                                    <small class='flex-fill text-center py-2'><i class='fa fa-bath text-primary me-2'></i>10 x 5 Door size</small>
+                                </div>
+                            </div>
+                        </div>
+                <div id='tab-1' class='tab-pane fade show p-0 active'>
+                    <div class='row g-4'>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <?php
+include 'database/conn.php';
+if (isset($_POST['Submit'])) {
+ 
+        $city = $_POST['city'];
+        $State =$_POST['State'];
+        $pinCode = $_POST['pinCode'];
+        $TypeOfGoods = $_POST['TypeOfGoods'];
+        $Nogoods= $_POST['Nogoods'];
+        $sizeOfGoods= $_POST['sizeOfGoods'];
+        $pickUpDate= $_POST['pickUpDate'];
+        $DropOffDate= $_POST['DropOffDate'];
+
+}
+$sql='SELECT * FROM `propertyragistration` WHERE `city`='$city' AND `State`='$State' AND `pinCode`='$pinCode'';
+// $sql = 'SELECT * FROM `propertyragistration`';
+$result = mysqli_query($conn, $sql);
+
+echo mysqli_num_rows($result);
+echo '<br>';
+while($row = mysqli_fetch_assoc($result)){
+        echo $row['Sr.no'].'name is'.$row['firstName'].'and last name is'.$row['lastName'];
+}
+?>
+
+
+
+<?php
+    include 'database/conn.php';
+    $address=$_GET['address'];
+    $city=$_GET['city'];
+    $State=$_GET['State'];
+    $pinCode=$_GET['pinCode'];
+    $userName= $_GET['userName'];
+    // $sql="SELECT * FROM `propertyragistration` WHERE `city`='$city' AND `State`='$State' AND `pinCode`='$pinCode'AND `address`='$address'";
+    // $result = mysqli_query($conn, $sql);
+    $sql2 = "SELECT * FROM `interiorimg`WHERE `userName`='$userName' AND `city`='$city' AND `State`='$State' AND `pinCode`='$pinCode'AND `address`='$address'";
+    $result = mysqli_query($conn, $sql2);
+    // echo mysqli_fetch_assoc($result);
+
+    // // echo mysqli_num_rows($result);
+    // echo "<br>";
+    while($row = mysqli_fetch_assoc($result)){
+    echo "<div class='carousel-item'><img src='upload/interior/".$row['images']."' class='d-block w-100' alt='...' width='500' height='600' ><div class='carousel-caption d-none d-md-block'><h5>Second slide label</h5><p>Some representative placeholder content for the second slide.</p></div></div>";
+    }
+    ?>
+
+
+<div class='col-lg-4 col-md-6 wow fadeInUp' data-wow-delay='0.1s'><div class='property-item rounded overflow-hidden'><div class='position-relative overflow-hidden'><a href=''><img class='img-fluid' src='assets/img/property/property-1.jpg' alt=''></a><div class='bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3'>For A Week</div><div class='bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3'>Apartment</div></div><div class='p-4 pb-0'><h5 class='text-primary mb-3'>3rd Floor</h5><a class='d-block h5 mb-2' href=''>Apartment For Rent</a> <p><i class='fa fa-map-marker-alt text-primary me-2'></i>Amrutdham ,Nashik</p></div><div class='d-flex border-top'><small class='flex-fill text-center border-end py-2'><i class='fa fa-ruler-combined text-primary me-2'></i>1000 Sqft</small><small class='flex-fill text-center border-end py-2'><i class='fa fa-bed text-primary me-2'></i>3 Rooms</small><small class='flex-fill text-center py-2'><i class='fa fa-bath text-primary me-2'></i>10 x 5 Door size</small></div></div></div>
